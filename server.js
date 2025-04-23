@@ -6,6 +6,9 @@ const connectMongoDB = require('./utility/connectDB')
 const { get_states, get_all_states } = require('./controllers/serverController')
 const { sendSuccess, sendError } = require('./utility/helpers')
 const constants = require('./utility/constants')
+const stateRouter = require('./routes/states.js')
+const cors = require('cors')
+app.use(cors({ credentials: true, origin: true }))
 
 app.get('/ping', (req, res) => {
   res.send('pong!')
@@ -35,6 +38,8 @@ app.get('/api/v1/gt_st', function(req, res){
         return sendError({res, error_index: 'server_error', status_code: constants.HTTP_STATUS.SERVER_ERROR})
     })
 })
+
+app.use('/api/v1/states', stateRouter)
 
 app.use(function(err, req, res, next){
     console.error(err.stack);
