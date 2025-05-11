@@ -7,16 +7,19 @@ const { get_states, get_all_states } = require('./controllers/serverController')
 const { sendSuccess, sendError } = require('./utility/helpers')
 const constants = require('./utility/constants')
 const stateRouter = require('./routes/states.js')
+const gptPrompt = require('./routes/gpt.js')
 const cors = require('cors')
+
 app.use(cors({ credentials: true, origin: true }))
+app.use(express.json());
+
+app.use(function(req, res, next){
+    console.log("\n\n In req.url :: ", req.url, req.method, req.path, req.ip, req.headers['user-agent'], "\n\n")
+    next()
+})
 
 app.get('/ping', (req, res) => {
   res.send('pong!')
-})
-
-app.use(function(req, res, next){
-    console.log("\n\n In req.url :: ", req.url)
-    next()
 })
 
 app.get('/api/v1/gt_al', function(req, res){
@@ -40,6 +43,8 @@ app.get('/api/v1/gt_st', function(req, res){
 })
 
 app.use('/api/v1/states', stateRouter)
+
+app.use('/api/v1/g_prmpt', gptPrompt)
 
 app.use(function(err, req, res, next){
     console.error(err.stack);

@@ -5,11 +5,19 @@ var configs = {
     DB_NAME: "india-tourism",
     MONGO_POOLSIZE: 5,
     MONGO_ATLAS_CONNECTION_STRING: "",
-    MONGO_HOST: process.env.MONGO_HOST ? process.env.MONGO_HOST : ['127.0.0.1'],
+    MONGO_HOST: process.env.MONGO_HOST || ['127.0.0.1'],
     MONGO_PORT: '27017',
     MONGO_REPLICA_SET_NAME: 'rs2',
-    MONGO_UNAME: process.env.MONGO_UNAME ? process.env.MONGO_UNAME : '', 
-    MONGO_PASS: process.env.MONGO_PASS ? process.env.MONGO_PASS : '', 
+    MONGO_UNAME: process.env.MONGO_UNAME || '', 
+    MONGO_PASS: process.env.MONGO_PASS || '', 
+    GPT_API_KEY: 'SOME_DUMMY_API_KEY_GOES_HERE',
+    GPT_API_RATE_LIMIT_DURATION: 1 * 60,  // 1 minute
+    GPT_API_RATE_LIMIT: 3,                // 3 api calls per minute
+    REDIS_PASS: '',
+    REDIS_HOST: process.env.REDIS_HOST || '127.0.0.1', 
+    REDIS_PORT: 6379,
+    REDIS_CHAT_DB: 4,
+    REDIS_MONITOR_DB: 2,
 }
 var overwriteConfigFulFileName =
   __dirname + '/' + configs.CONFIGS_OVERWRITE_FILE

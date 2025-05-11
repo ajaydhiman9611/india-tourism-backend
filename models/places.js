@@ -17,10 +17,16 @@ let placeSchema = new mongoose.Schema({
           required: true,
         },
     },
-    images: [{
+    images: [{  
         type: String, // URL of the image
     }],
-    tags: [{type: mongoose.Types.ObjectId}]
+    tags: [{type: mongoose.Types.ObjectId}],
+    // rating: ,
+    // openingHours: ,
+    // entryFee: ,
+    // bestTimeToVisit: ,
+    // videoUrl: ,
+    // isFeatured: ,
 })
 
 placeSchema.index({ coordinates: '2dsphere' }); // Create a geospatial index
